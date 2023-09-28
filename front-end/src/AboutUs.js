@@ -1,15 +1,57 @@
-import {Link} from 'react-router-dom';
-import image from './photo.jpg';
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import './Messages.css'
+import loadingIcon from './loading.gif'
 
 const AboutUs = props => {
-  return(
+  const [paragraphs, setParagraphs] = useState([])
+  const [loaded, setLoaded] = useState(false)
+  const [error, setError] = useState('')
+  const [imageURL, setImageURL] = useState('')
+
+  const getMessages = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/aboutus`)
+      .then(response => {
+        setParagraphs(response.data.paragraphs)
+        setImageURL(response.data.imageURL)
+      })
+      .catch(err => {
+        setError(err)
+      })
+      .finally(() => {
+        setLoaded(true)
+      })
+  }
+
+  useEffect(() => {
+    getMessages()
+
+    const intervalHandle = setInterval(() => {
+      getMessages()
+    }, 5000)
+
+    // return a function that will be called when this component unloads
+    return e => {
+      // clear the timer, so we don't still load messages when this component is not loaded anymore
+      clearInterval(intervalHandle)
+    }
+  }, [])
+
+  return (
     <>
-    <h1>HI IM GLORIA</h1>
-    <p> para 1</p>
-    <p> para 2</p>
-    <img style ={{width: "20%", height: "20%"}} src={image} alt={"pic of Gloria"}/>
+      <h1>About me: Gloria!</h1>
+      {paragraphs.map(message => (
+        <p>{message}</p>
+      ))}
+      <img
+        style={{ width: '30%', height: '20%' }}
+        src={imageURL}
+        alt="photo of Gloria"
+      />
     </>
   )
-};
+}
 
-export default AboutUs;
+export default AboutUs
