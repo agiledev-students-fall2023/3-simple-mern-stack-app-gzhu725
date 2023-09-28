@@ -41,9 +41,11 @@ const AboutUs = props => {
 
   return (
     <>
-      <h1>About me: Gloria!</h1>
+      <h1 style ={{textAlign:'center'}}>About me: Gloria!</h1>
       {paragraphs.map(message => (
-        <p>{message}</p>
+        <p
+        style={{marginBottom: '10px'}}
+        >{message}</p>
       ))}
       <img
         style={{ width: '30%', height: '20%' }}
