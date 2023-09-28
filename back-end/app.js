@@ -45,7 +45,7 @@ app.get('/aboutus', (req,res) => {
   res.json({
     paragraphs: [
       "Hi! I'm Gloria. I'm a third year student studying Computer Science and Economics. I like getting my feet wet in any kind of development, but I have some previous experience with web development.",
-      "This summer I was able to work on a registration portal website which uses Typescript, CSS, and HTML. I was also able to get an internship in computer networking. I had to write a lot of code in C (a little scary, but doable.",
+      "This summer I was able to work on a registration portal website which uses Typescript, CSS, and HTML. I was also able to get an internship in computer networking. I had to write a lot of code in C (a little scary, but doable.)",
       "Looking forward to Agile this semester!"
     ],
     imageURL: "/photo.jpg"
